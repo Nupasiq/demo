@@ -1,0 +1,7 @@
+auth__login:
+  path: /login
+  methods: [POST]
+
+auth__logout:
+  path: /logout
+  methods: [GET]

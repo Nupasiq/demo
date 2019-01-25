@@ -4,10 +4,11 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Doctrine\ORM\PersistentCollection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class User
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table("user")
  */
 class User implements UserInterface
@@ -36,7 +37,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @var Role[]|PersistentCollection
+     * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\Role", cascade={"persist"})
      * @ORM\JoinTable(name="user_to_role",
@@ -65,6 +66,14 @@ class User implements UserInterface
      * @ORM\Column(type="string", name="last_name", length=128, nullable=false)
      */
     private $lastName;
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->roles = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -123,21 +132,43 @@ class User implements UserInterface
     }
 
     /**
-     * @return Role[]|PersistentCollection
+     * @return array
      */
-    public function getRoles()
+    public function getRoles(): array
     {
-        return $this->roles;
+        return $this->roles->map(function (Role $role) {
+            return $role->getRole();
+        })->toArray();
     }
 
     /**
-     * @param Role[]|PersistentCollection $roles
+     * @param array $roles
      *
      * @return self
      */
-    public function setRoles($roles)
+    public function setRoles(array $roles)
     {
-        $this->roles = $roles;
+        foreach ($roles as $role) {
+            if (!$this->roles->contains($role)) {
+                $this->roles[] = $role;
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param array $roles
+     *
+     * @return self
+     */
+    public function deleteRoles(array $roles)
+    {
+        foreach ($roles as $role) {
+            if ($this->roles->contains($role)) {
+                $this->roles->removeElement($role);
+            }
+        }
 
         return $this;
     }
