@@ -1,0 +1,4 @@
+api_v1:
+  resource: 'api/v1'
+  type: directory
+  prefix: /api/v1
