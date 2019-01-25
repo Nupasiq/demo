@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Topic
- *
+ * @ORM\Entity
  * @ORM\Table("topic")
  */
 class Topic

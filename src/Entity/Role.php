@@ -6,15 +6,18 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Role
+ * @ORM\Entity
  * @ORM\Table("role")
  */
 class Role
 {
+    const ROLE_ADMIN = 1;
+
     /**
      * @var int
      *
      * @ORM\Id
-     * @ORM\Column(type="integer", nullable=false, options={"unsigned"}=true)
+     * @ORM\Column(type="integer", nullable=false, options={"unsigned"=true})
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;

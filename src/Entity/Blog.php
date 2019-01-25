@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Blog
- *
+ * @ORM\Entity
  * @ORM\Table("blog")
  */
 class Blog
