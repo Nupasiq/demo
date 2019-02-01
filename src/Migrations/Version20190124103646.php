@@ -37,6 +37,8 @@ final class Version20190124103646 extends AbstractMigration
         $userTable->addColumn('salt', Type::STRING, ['notnull' => true, 'length' => 256]);
         $userTable->addColumn('first_name', Type::STRING, ['notnull' => true, 'length' => 128]);
         $userTable->addColumn('last_name', Type::STRING, ['notnull' => true, 'length' => 128]);
+        $userTable->addColumn('is_active', Type::BOOLEAN, ['notnull' => true]);
+        $userTable->addUniqueIndex(['email']);
         $userTable->setPrimaryKey(['id']);
 
         $roleTable = $schema->createTable(self::ROLE);
