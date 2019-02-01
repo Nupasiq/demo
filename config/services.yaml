@@ -24,8 +24,21 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    # Start argument resolvers
+    App\ArgumentResolver\DTOValueResolver:
+        arguments: ["@serializer"]
+        tags:
+            - { name: controller.argument_value_resolver}
+    # End argument resolvers
+
+    # Start commands
     App\Command\SetAdminCommand:
         arguments: ["@doctrine.orm.default_entity_manager"]
+    # End commands
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    # Start Managers
+    App\Services\DataManager\UserDataManager:
+        arguments:
+            - "@doctrine.orm.default_entity_manager"
+            - "@security.user_password_encoder.generic"
+    # End Managers

@@ -25,7 +25,7 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", name="email", length=128, nullable=false)
+     * @ORM\Column(type="string", name="email", length=128, nullable=false, unique=true)
      */
     private $email;
 
@@ -66,6 +66,13 @@ class User implements UserInterface
      * @ORM\Column(type="string", name="last_name", length=128, nullable=false)
      */
     private $lastName;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", name="is_active", nullable=false)
+     */
+    private $isActive = true;
 
     /**
      * User constructor.
@@ -176,7 +183,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getSalt(): string
+    public function getSalt(): ?string
     {
         return $this->salt;
     }
@@ -229,6 +236,26 @@ class User implements UserInterface
     public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param bool $isActive
+     *
+     * @return self
+     */
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
 
         return $this;
     }

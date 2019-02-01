@@ -73,7 +73,8 @@ class SetAdminCommand extends Command
                 ->setPassword($this->passwordEncoder->encodePassword($user, self::PASSWORD))
                 ->setRoles([$this->em->getReference(Role::class, Role::ROLE_ADMIN)])
                 ->setFirstName('Jon')
-                ->setLastName('Dou');
+                ->setLastName('Dou')
+                ->setIsActive(true);
 
             $this->em->persist($user);
             $this->em->flush();
