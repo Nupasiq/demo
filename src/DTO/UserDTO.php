@@ -40,6 +40,11 @@ class UserDTO implements DTOInterface
     public $roles;
 
     /**
+     * @var bool
+     */
+    public $isActive;
+
+    /**
      * @var string
      */
     private $requestType;

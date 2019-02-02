@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 use Symfony\Component\Serializer\SerializerInterface;
 use App\DTO\UserDTO;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Class DTOValueResolver
@@ -25,6 +26,11 @@ class DTOValueResolver implements ArgumentValueResolverInterface
     private $serializer;
 
     /**
+     * @var ValidatorInterface
+     */
+    private $validator;
+
+    /**
      * @var string
      */
     private $dto;
@@ -35,12 +41,14 @@ class DTOValueResolver implements ArgumentValueResolverInterface
     private $requestData;
 
     /**
-     * AbstractDTOValueResolver constructor.
+     * DTOValueResolver constructor.
      * @param SerializerInterface $serializer
+     * @param ValidatorInterface  $validator
      */
-    public function __construct(SerializerInterface $serializer)
+    public function __construct(SerializerInterface $serializer, ValidatorInterface $validator)
     {
         $this->serializer = $serializer;
+        $this->validator = $validator;
     }
 
     /**
@@ -73,8 +81,11 @@ class DTOValueResolver implements ArgumentValueResolverInterface
         /**
          * @var DTOInterface $serialized
          */
+        $validationGroups = $request->attributes->get('validation_groups', []);
         $serialized = $this->serializer->deserialize(json_encode($this->requestData), $this->dto, 'json');
         $serialized->setRequestType($request->getMethod());
+        $violations = $this->validator->validate($serialized, null, $validationGroups);
+
         yield $serialized;
     }
 

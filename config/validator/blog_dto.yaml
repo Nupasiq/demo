@@ -1,0 +1,26 @@
+App\DTO\BlogDTO:
+  properties:
+    title:
+      - NotBlank:
+          groups: ["create"]
+      - Type:
+          type: string
+          groups: ["create"]
+    description:
+      - NotBlank:
+          groups: ["create"]
+      - Type:
+          type: string
+          groups: ["create"]
+    topic:
+      - NotBlank:
+          groups: ["create"]
+      - Type:
+          type: integer
+          groups: ["create"]
+    isPublished:
+      - NotBlank:
+          groups: ["create"]
+      - Type:
+          type: bool
+          groups: ["create"]
