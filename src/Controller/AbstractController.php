@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\DTO\DTOInterface;
+use App\Services\DataManager\AbstractDataManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use FOS\RestBundle\Controller\ControllerTrait;
 use FOS\RestBundle\View\ViewHandlerInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class AbstractController

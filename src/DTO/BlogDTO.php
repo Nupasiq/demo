@@ -2,12 +2,12 @@
 
 namespace App\DTO;
 
-use App\Entity\User;
+use App\Entity\Blog;
 
 /**
- * Class UserDTO
+ * Class BlogDTO
  */
-class UserDTO implements DTOInterface
+class BlogDTO implements DTOInterface
 {
     /**
      * @var int
@@ -17,37 +17,32 @@ class UserDTO implements DTOInterface
     /**
      * @var string
      */
-    public $email;
-
-    /**
-     * @var string
-     */
-    public $password;
-
-    /**
-     * @var string
-     */
-    public $firstName;
-
-    /**
-     * @var string
-     */
-    public $lastName;
-
-    /**
-     * @var array
-     */
-    public $roles;
-
-    /**
-     * @var string
-     */
     private $requestType;
 
     /**
-     * @return int
+     * @var string
      */
-    public function getId(): int
+    public $title;
+
+    /**
+     * @var string
+     */
+    public $description;
+
+    /**
+     * @var int
+     */
+    public $topic;
+
+    /**
+     * @var bool
+     */
+    public $isPublished;
+
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -62,6 +57,14 @@ class UserDTO implements DTOInterface
         $this->id = $id;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEntityName(): string
+    {
+        return Blog::class;
     }
 
     /**
@@ -82,14 +85,6 @@ class UserDTO implements DTOInterface
         $this->requestType = $requestType;
 
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEntityName(): string
-    {
-        return User::class;
     }
 
     /**

@@ -41,4 +41,9 @@ services:
         arguments:
             - "@doctrine.orm.default_entity_manager"
             - "@security.user_password_encoder.generic"
+
+    App\Services\DataManager\BlogDataManager:
+        arguments:
+            - "@doctrine.orm.default_entity_manager"
+            - "@security.token_storage"
     # End Managers
