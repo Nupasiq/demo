@@ -30,6 +30,9 @@ class BlogController extends AbstractController
     public function getAction(BlogDataManager $manager, BlogDTO $dto): Response
     {
         $response = $this->view($manager->execute($dto));
+        $response
+            ->getContext()
+            ->setGroups(['blog_single', 'user_single', 'show_topic']);
 
         return $this->handleView($response);
     }
@@ -45,6 +48,9 @@ class BlogController extends AbstractController
     public function cgetAction(BlogDataManager $manager, BlogDTO $dto): Response
     {
         $response = $this->view($manager->execute($dto));
+        $response
+            ->getContext()
+            ->setGroups(['blog_list', 'user_list', 'show_topic']);
 
         return $this->handleView($response);
     }
@@ -60,6 +66,9 @@ class BlogController extends AbstractController
     public function postAction(BlogDataManager $manager, BlogDTO $dto): Response
     {
         $response = $this->view($manager->execute($dto));
+        $response
+            ->getContext()
+            ->setGroups(['blog_single', 'user_single', 'show_topic']);
 
         return $this->handleView($response);
     }
@@ -75,6 +84,9 @@ class BlogController extends AbstractController
     public function putAction(BlogDataManager $manager, BlogDTO $dto): Response
     {
         $response = $this->view($manager->execute($dto));
+        $response
+            ->getContext()
+            ->setGroups(['blog_single', 'user_single', 'show_topic']);
 
         return $this->handleView($response);
     }
