@@ -28,4 +28,9 @@ interface DTOInterface
      * @return self
      */
     public function setRequestType(string $requestType): self;
+
+    /**
+     * @return array
+     */
+    public function toArray(): array;
 }
