@@ -26,7 +26,9 @@ services:
 
     # Start argument resolvers
     App\ArgumentResolver\DTOValueResolver:
-        arguments: ["@serializer"]
+        arguments:
+            - "@serializer"
+            - "@validator"
         tags:
             - { name: controller.argument_value_resolver}
     # End argument resolvers

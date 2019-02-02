@@ -56,7 +56,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Post("/blogs")
+     * @Post("/blogs", defaults={"validation_groups": {"create"}})
      *
      * @param BlogDataManager $manager
      * @param BlogDTO         $dto
@@ -74,7 +74,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Put("/blogs")
+     * @Put("/blogs", defaults={"validation_groups": {"update"}})
      *
      * @param BlogDataManager $manager
      * @param BlogDTO         $dto

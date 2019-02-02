@@ -56,7 +56,7 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Post("/users")
+     * @Post("/users", defaults={"validation_groups": {"create"}})
      *
      * @param UserDataManager $manager
      * @param UserDTO         $dto
@@ -74,7 +74,7 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Put("/users")
+     * @Put("/users", defaults={"validation_groups": {"update"}})
      *
      * @param UserDataManager $manager
      * @param UserDTO         $dto

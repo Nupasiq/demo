@@ -1,0 +1,37 @@
+App\DTO\UserDTO:
+  properties:
+    email:
+      - NotBlank:
+          groups: ["create"]
+      - Type:
+          type: string
+          groups: ["create", "update"]
+    password:
+      - NotBlank:
+          groups: ["create"]
+      - Type:
+          type: string
+          groups: ["create"]
+    firstName:
+      - NotBlank:
+          groups: ["create", "update"]
+      - Type:
+          type: string
+          groups: ["create", "update"]
+    lastName:
+      - NotBlank:
+          groups: ["crete", "update"]
+      - Type:
+          type: string
+    roles:
+      - NotBlank:
+          groups: ["create"]
+      - Type:
+          type: array
+          groups: ["create"]
+    isActive:
+      - NotBlank:
+          groups: ["create"]
+      - Type:
+          type: bool
+          groups: ["create"]
