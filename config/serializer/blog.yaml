@@ -1,0 +1,14 @@
+App\Entity\Blog:
+  attributes:
+    id:
+      groups: ['blog_single', 'blog_list']
+    title:
+      groups: ['blog_single', 'blog_list']
+    description:
+      groups: ['blog_single']
+    topic:
+      groups: ['blog_single', 'blog_list']
+    owner:
+      groups: ['blog_single', 'blog_list']
+    isPublished:
+      groups: ['blog_single']
