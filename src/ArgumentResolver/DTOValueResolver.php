@@ -2,6 +2,7 @@
 
 namespace App\ArgumentResolver;
 
+use App\DTO\BlogDTO;
 use App\DTO\DTOInterface;
 use Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +16,7 @@ use App\DTO\UserDTO;
 class DTOValueResolver implements ArgumentValueResolverInterface
 {
     const USERS = 'users';
-    const BLOG = 'blog';
+    const BLOG = 'blogs';
     const GET_TYPE = 'id';
 
     /**
@@ -50,7 +51,14 @@ class DTOValueResolver implements ArgumentValueResolverInterface
      */
     public function supports(Request $request, ArgumentMetadata $argument)
     {
-        return UserDTO::class === $argument->getType();
+        switch ($argument->getType()) {
+            case UserDTO::class:
+                return true;
+            case BlogDTO::class:
+                return true;
+            default:
+                return false;
+        }
     }
 
     /**
@@ -73,7 +81,7 @@ class DTOValueResolver implements ArgumentValueResolverInterface
     /**
      * @param Request $request
      */
-    private function dtoDataDecider(Request $request)
+    private function dtoDataDecider(Request $request): void
     {
 
         switch (true) {
@@ -81,8 +89,8 @@ class DTOValueResolver implements ArgumentValueResolverInterface
                 $this->dto = UserDTO::class;
                 $this->requestData = $request->get(self::USERS);
                 break;
-            case $request->get(self::BLOG):
-                $this->dto = null;
+            case strpos($request->getUri(), self::BLOG):
+                $this->dto = BlogDTO::class;
                 $this->requestData = $request->get(self::BLOG);
                 break;
             default:
@@ -94,7 +102,7 @@ class DTOValueResolver implements ArgumentValueResolverInterface
     /**
      * @param Request $request
      */
-    private function onGet(Request $request)
+    private function onGet(Request $request): void
     {
         if ($request->getMethod() === Request::METHOD_GET) {
             $this->requestData[self::GET_TYPE] = (int) $request->get(self::GET_TYPE);

@@ -2,32 +2,32 @@
 
 namespace App\Controller;
 
-use App\DTO\UserDTO;
+
+use App\DTO\BlogDTO;
+use App\Services\DataManager\BlogDataManager;
+use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use Symfony\Component\HttpFoundation\Response;
-use App\Services\DataManager\UserDataManager;
 
 /**
- * Class UsersController
+ * Class BlogController
  *
- * @Rest\RouteResource("Users")
+ * @Rest\RouteResource("Blogs")
  */
-class UsersController extends AbstractController
+class BlogController extends AbstractController
 {
-
     /**
-     * @Get("/users/{id}")
+     * @Get("/blogs/{id}")
      *
-     * @param UserDataManager $manager
-     * @param UserDTO         $dto
+     * @param BlogDataManager $manager
+     * @param BlogDTO         $dto
      *
      * @return Response
      */
-    public function getAction(UserDataManager $manager, UserDTO $dto): Response
+    public function getAction(BlogDataManager $manager, BlogDTO $dto): Response
     {
         $response = $this->view($manager->execute($dto));
 
@@ -35,14 +35,14 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Get("/users")
+     * @Get("/blogs")
      *
-     * @param UserDataManager $manager
-     * @param UserDTO         $dto
+     * @param BlogDataManager $manager
+     * @param BlogDTO         $dto
      *
      * @return Response
      */
-    public function cgetAction(UserDataManager $manager, UserDTO $dto): Response
+    public function cgetAction(BlogDataManager $manager, BlogDTO $dto): Response
     {
         $response = $this->view($manager->execute($dto));
 
@@ -50,14 +50,14 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Post("/users")
+     * @Post("/blogs")
      *
-     * @param UserDataManager $manager
-     * @param UserDTO         $dto
+     * @param BlogDataManager $manager
+     * @param BlogDTO         $dto
      *
      * @return Response
      */
-    public function postAction(UserDataManager $manager, UserDTO $dto): Response
+    public function postAction(BlogDataManager $manager, BlogDTO $dto): Response
     {
         $response = $this->view($manager->execute($dto));
 
@@ -65,14 +65,14 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Put("/users")
+     * @Put("/blogs")
      *
-     * @param UserDataManager $manager
-     * @param UserDTO         $dto
+     * @param BlogDataManager $manager
+     * @param BlogDTO         $dto
      *
      * @return Response
      */
-    public function putAction(UserDataManager $manager, UserDTO $dto): Response
+    public function putAction(BlogDataManager $manager, BlogDTO $dto): Response
     {
         $response = $this->view($manager->execute($dto));
 
@@ -80,14 +80,14 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Delete("/users")
+     * @Delete("/blogs")
      *
-     * @param UserDataManager $manager
-     * @param UserDTO         $dto
+     * @param BlogDataManager $manager
+     * @param BlogDTO         $dto
      *
      * @return Response
      */
-    public function deleteAction(UserDataManager $manager, UserDTO $dto): Response
+    public function deleteAction(BlogDataManager $manager, BlogDTO $dto): Response
     {
         $response = $this->view($manager->execute($dto));
 
