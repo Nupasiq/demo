@@ -4,6 +4,7 @@ namespace App\ArgumentResolver;
 
 use App\DTO\BlogDTO;
 use App\DTO\DTOInterface;
+use App\Exception\ValidationException;
 use Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
@@ -74,6 +75,8 @@ class DTOValueResolver implements ArgumentValueResolverInterface
      * @param ArgumentMetadata $argument
      *
      * @return \Generator
+     *
+     * @throws ValidationException
      */
     public function resolve(Request $request, ArgumentMetadata $argument)
     {
@@ -85,7 +88,9 @@ class DTOValueResolver implements ArgumentValueResolverInterface
         $serialized = $this->serializer->deserialize(json_encode($this->requestData), $this->dto, 'json');
         $serialized->setRequestType($request->getMethod());
         $violations = $this->validator->validate($serialized, null, $validationGroups);
-
+        if (count($violations) > 0) {
+            throw new ValidationException($violations);
+        }
         yield $serialized;
     }
 
