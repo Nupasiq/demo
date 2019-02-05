@@ -6,14 +6,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Role
+ * Class DtoAccessRight
  * @ORM\Entity
- * @ORM\Table("role")
+ * @ORM\Table("dto_access_right")
  */
-class Role
+class DtoAccessRight
 {
-    const ROLE_ADMIN = 1;
-
     /**
      * @var int
      *
@@ -26,26 +24,26 @@ class Role
     /**
      * @var string
      *
-     * @ORM\Column(type="string", name="role", length=256, nullable=false)
+     * @ORM\Column(type="string", name="name", nullable=false, length=256)
      */
-    private $role;
+    private $name;
 
     /**
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\AccessRight", cascade={"persist"})
-     ** @ORM\JoinTable(name="role_to_access_right",
-     *     joinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")},
+     * @ORM\JoinTable(name="dto_to_access_right",
+     *     joinColumns={@ORM\JoinColumn(name="dto_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="ar_id", referencedColumnName="id")})
      */
-    private $roleToAr;
+    private $dtoToAr;
 
     /**
-     * Role constructor.
+     * DtoAccessRight constructor.
      */
     public function __construct()
     {
-        $this->roleToAr = new ArrayCollection();
+        $this->dtoToAr = new ArrayCollection();
     }
 
     /**
@@ -59,32 +57,40 @@ class Role
     /**
      * @return string
      */
-    public function getRole(): string
+    public function getName(): string
     {
-        return $this->role;
+        return $this->name;
     }
 
     /**
-     * @param string $role
+     * @param string $name
      *
      * @return self
      */
-    public function setRole(string $role): self
+    public function setName(string $name): self
     {
-        $this->role = $role;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
+     * @return ArrayCollection
+     */
+    public function getDtoToAr(): ArrayCollection
+    {
+        return $this->dtoToAr;
+    }
+
+    /**
      * @param AccessRight $accessRight
      *
-     * @return self
+     * @return DtoAccessRight
      */
-    public function addRoleToAr(AccessRight $accessRight): self
+    public function addDtoToAr(AccessRight $accessRight): self
     {
-        if (!$this->roleToAr->contains($accessRight)) {
-            $this->roleToAr->add($accessRight);
+        if (!$this->dtoToAr->contains($accessRight)) {
+            $this->dtoToAr->add($accessRight);
         }
 
         return $this;
@@ -93,12 +99,12 @@ class Role
     /**
      * @param AccessRight $accessRight
      *
-     * @return self
+     * @return DtoAccessRight
      */
-    public function removeRoleToAr(AccessRight $accessRight): self
+    public function removeDtoToArr(AccessRight $accessRight): self
     {
-        if ($this->roleToAr->contains($accessRight)) {
-            $this->roleToAr->removeElement($accessRight);
+        if ($this->dtoToAr->contains($accessRight)) {
+            $this->dtoToAr->removeElement($accessRight);
         }
 
         return $this;
