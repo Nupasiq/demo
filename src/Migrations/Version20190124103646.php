@@ -79,6 +79,7 @@ final class Version20190124103646 extends AbstractMigration
     {
         $this->connection->insert(self::ROLE, ['id' => 1, 'role' => 'ROLE_ADMIN']);
         $this->connection->insert(self::ROLE, ['id' => 2, 'role' => 'ROLE_USER']);
+        $this->connection->insert(self::ROLE, ['id' => 3, 'role' => 'ROLE_MODERATOR']);
 
         $this->connection->insert(self::TOPIC, ['id' => 1, 'name' => 'News']);
         $this->connection->insert(self::TOPIC, ['id' => 2, 'name' => 'Article']);
