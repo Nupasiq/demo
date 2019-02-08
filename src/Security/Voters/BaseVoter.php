@@ -97,7 +97,7 @@ class BaseVoter extends Voter
     /**
      * @param int $actionId
      */
-    protected function isActionAllowed(int $actionId)
+    protected function isActionAllowed(int $actionId): void
     {
         $dtoAccessRightList = $this->getDtoAccessRightList($actionId, $this->dto->getRequestType());
         $dtoAccessRightId = reset($dtoAccessRightList);
@@ -120,7 +120,7 @@ class BaseVoter extends Voter
      *
      * @return array
      */
-    private function getDtoAccessRightList(int $actionId, string $actionType)
+    private function getDtoAccessRightList(int $actionId, string $actionType): array
     {
         return $this->dtoAccessRight->filter(function (AccessRight $accessRight) use ($actionId, $actionType) {
             if ($accessRight->getAction()->getId() === $actionId && $accessRight->getType()->getName() === $actionType) {

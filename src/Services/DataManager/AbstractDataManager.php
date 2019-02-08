@@ -90,7 +90,7 @@ abstract class AbstractDataManager
      *
      * @return ObjectRepository|EntityRepository
      */
-    protected function getRepository(string $className)
+    protected function getRepository(string $className): ObjectRepository
     {
         return $this->em->getRepository($className);
     }
@@ -133,7 +133,7 @@ abstract class AbstractDataManager
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    protected function persist($entity)
+    protected function persist($entity): void
     {
         $this->em->persist($entity);
         $this->em->flush();
@@ -145,7 +145,7 @@ abstract class AbstractDataManager
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    protected function remove($entity)
+    protected function remove($entity): void
     {
         $this->em->remove($entity);
         $this->em->flush();

@@ -56,7 +56,7 @@ class BlogDataManager extends AbstractDataManager
     /**
      * @return Blog[]
      */
-    protected function prepareCGet()
+    protected function prepareCGet(): array
     {
         return $this->getEntityManager()->getRepository(Blog::class)->findAll();
     }
@@ -68,7 +68,7 @@ class BlogDataManager extends AbstractDataManager
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \ReflectionException
      */
-    protected function preparePost()
+    protected function preparePost(): Blog
     {
         $blog = new Blog();
         $this->setEntityData($blog);
@@ -84,7 +84,7 @@ class BlogDataManager extends AbstractDataManager
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \ReflectionException
      */
-    protected function preparePut()
+    protected function preparePut(): Blog
     {
         /**
          * @var Blog $blog
@@ -127,7 +127,7 @@ class BlogDataManager extends AbstractDataManager
      * @throws \Doctrine\ORM\ORMException
      * @throws \ReflectionException
      */
-    private function setEntityData(Blog $blog)
+    private function setEntityData(Blog $blog): void
     {
         $reflectionEntity = new \ReflectionClass($blog);
 
@@ -159,7 +159,7 @@ class BlogDataManager extends AbstractDataManager
      *
      * @throws \Doctrine\ORM\ORMException
      */
-    private function prepareTopic()
+    private function prepareTopic(): Topic
     {
         return $this->getEntityManager()->getReference(Topic::class, $this->getDto()->topic);
     }

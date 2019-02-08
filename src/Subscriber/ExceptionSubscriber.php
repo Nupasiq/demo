@@ -17,7 +17,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
     /**
      * @return array
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [KernelEvents::EXCEPTION => [['onThrowable']]];
     }
@@ -25,26 +25,30 @@ class ExceptionSubscriber implements EventSubscriberInterface
     /**
      * @param GetResponseForExceptionEvent $event
      */
-    public function onThrowable(GetResponseForExceptionEvent $event)
+    public function onThrowable(GetResponseForExceptionEvent $event): void
     {
+        $exception = $event->getException();
         $errors = [];
-        if ($event->getException() instanceof AppException) {
-            $errors = $event->getException()->getErrors();
+        if ($exception instanceof AppException) {
+            /**
+             * @var AppException $exception
+             */
+            $errors = $exception->getErrors();
         }
 
         $data = [
             'status' => 'error',
             'data' => [
                 'errors'  => $errors,
-                'message' => $event->getException()->getMessage(),
+                'message' => $exception->getMessage(),
             ],
-            'code' => $event->getException()->getCode() !== 0
-                ? $event->getException()->getCode()
+            'code' => $exception->getCode() !== 0
+                ? $exception->getCode()
                 : Response::HTTP_INTERNAL_SERVER_ERROR,
         ];
 
         if (getenv('APP_ENV') === 'dev') {
-            $data['trace'] = $event->getException()->getTrace();
+            $data['trace'] = $exception->getTrace();
         }
 
         $response = new JsonResponse($data, Response::HTTP_OK);
