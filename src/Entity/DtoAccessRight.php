@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,7 +30,7 @@ class DtoAccessRight
     private $name;
 
     /**
-     * @var ArrayCollection
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\AccessRight", cascade={"persist"})
      * @ORM\JoinTable(name="dto_to_access_right",
@@ -75,9 +76,9 @@ class DtoAccessRight
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getDtoToAr()
+    public function getDtoToAr(): Collection
     {
         return $this->dtoToAr;
     }

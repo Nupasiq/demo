@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -77,9 +78,9 @@ class Role
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getRoleToAr()
+    public function getRoleToAr(): Collection
     {
         return $this->roleToAr;
     }

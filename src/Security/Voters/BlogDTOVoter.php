@@ -51,7 +51,7 @@ class BlogDTOVoter extends BaseVoter
      *
      * @return int
      */
-    private function actionDecider(DTOInterface $dto)
+    private function actionDecider(DTOInterface $dto): int
     {
         switch (true) {
             case Request::METHOD_POST === $dto->getRequestType():

@@ -52,9 +52,9 @@ class UserDataManager extends AbstractDataManager
     }
 
     /**
-     * @return User|User[]
+     * @return User[]
      */
-    protected function prepareCGet()
+    protected function prepareCGet(): array
     {
         return $this->getRepository(User::class)->findAll();
     }
@@ -66,7 +66,7 @@ class UserDataManager extends AbstractDataManager
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \ReflectionException
      */
-    protected function preparePost()
+    protected function preparePost(): User
     {
         $user = new User();
 
@@ -83,7 +83,7 @@ class UserDataManager extends AbstractDataManager
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \ReflectionException
      */
-    protected function preparePut()
+    protected function preparePut(): User
     {
         /**
          * @var User $user
@@ -127,7 +127,7 @@ class UserDataManager extends AbstractDataManager
      * @throws \Doctrine\ORM\ORMException
      * @throws \ReflectionException
      */
-    private function setEntityData(User $user)
+    private function setEntityData(User $user): void
     {
         $reflectionEntity = new \ReflectionClass($user);
 
@@ -155,7 +155,7 @@ class UserDataManager extends AbstractDataManager
      *
      * @return string
      */
-    private function preparePassword(User $user)
+    private function preparePassword(User $user): string
     {
         $user->setSalt(is_null($user->getSalt()) ? '123' : $user->getSalt());
 
@@ -168,7 +168,7 @@ class UserDataManager extends AbstractDataManager
      *
      * @throws \Doctrine\ORM\ORMException
      */
-    private function prepareRoles()
+    private function prepareRoles(): array
     {
         $roles = [];
         $roleList = $this->getDto()->roles;
