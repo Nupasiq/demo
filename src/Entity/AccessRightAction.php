@@ -11,6 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class AccessRightAction
 {
+    const MINE = 1;
+    const ALL = 2;
     /**
      * @var int
      *

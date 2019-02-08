@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-
 use App\DTO\BlogDTO;
 use App\Services\DataManager\BlogDataManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -65,6 +64,7 @@ class BlogController extends AbstractController
      */
     public function postAction(BlogDataManager $manager, BlogDTO $dto): Response
     {
+        $this->denyAccessUnlessGranted('', $dto);
         $response = $this->view($manager->execute($dto));
         $response
             ->getContext()
@@ -83,6 +83,7 @@ class BlogController extends AbstractController
      */
     public function putAction(BlogDataManager $manager, BlogDTO $dto): Response
     {
+        $this->denyAccessUnlessGranted('', $dto);
         $response = $this->view($manager->execute($dto));
         $response
             ->getContext()
@@ -101,6 +102,7 @@ class BlogController extends AbstractController
      */
     public function deleteAction(BlogDataManager $manager, BlogDTO $dto): Response
     {
+        $this->denyAccessUnlessGranted('', $dto);
         $response = $this->view($manager->execute($dto));
 
         return $this->handleView($response);
