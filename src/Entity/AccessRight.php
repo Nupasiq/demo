@@ -104,7 +104,7 @@ class AccessRight
      *
      * @return self
      */
-    public function setAction(AccessRightAction $action): AccessRight
+    public function setAction(AccessRightAction $action): self
     {
         $this->action = $action;
 

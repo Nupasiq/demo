@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Class User
@@ -151,7 +152,7 @@ class User implements UserInterface
     /**
      * @return array
      */
-    public function getAccessRights()
+    public function getAccessRights(): array
     {
         return $this->roles->map(function (Role $role) {
             return $role->getRoleToAr()->map(function (AccessRight $accessRight) {
@@ -165,7 +166,7 @@ class User implements UserInterface
      *
      * @return self
      */
-    public function setRoles(array $roles)
+    public function setRoles(array $roles): self
     {
         foreach ($roles as $role) {
             if (!$this->roles->contains($role)) {
@@ -181,7 +182,7 @@ class User implements UserInterface
      *
      * @return self
      */
-    public function deleteRoles(array $roles)
+    public function deleteRoles(array $roles): self
     {
         foreach ($roles as $role) {
             if ($this->roles->contains($role)) {

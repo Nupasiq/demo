@@ -58,7 +58,7 @@ class DTOValueResolver implements ArgumentValueResolverInterface
      *
      * @return bool
      */
-    public function supports(Request $request, ArgumentMetadata $argument)
+    public function supports(Request $request, ArgumentMetadata $argument): bool
     {
         switch ($argument->getType()) {
             case UserDTO::class:
@@ -78,7 +78,7 @@ class DTOValueResolver implements ArgumentValueResolverInterface
      *
      * @throws ValidationException
      */
-    public function resolve(Request $request, ArgumentMetadata $argument)
+    public function resolve(Request $request, ArgumentMetadata $argument): \Generator
     {
         $this->dtoDataDecider($request);
         /**
