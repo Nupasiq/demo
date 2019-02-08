@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class DtoAccessRight
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\DtoAccessRightRepository")
  * @ORM\Table("dto_access_right")
  */
 class DtoAccessRight
@@ -77,7 +77,7 @@ class DtoAccessRight
     /**
      * @return ArrayCollection
      */
-    public function getDtoToAr(): ArrayCollection
+    public function getDtoToAr()
     {
         return $this->dtoToAr;
     }

@@ -149,6 +149,18 @@ class User implements UserInterface
     }
 
     /**
+     * @return array
+     */
+    public function getAccessRights()
+    {
+        return $this->roles->map(function (Role $role) {
+            return $role->getRoleToAr()->map(function (AccessRight $accessRight) {
+                return $accessRight->getId();
+            })->toArray();
+        })->first();
+    }
+
+    /**
      * @param array $roles
      *
      * @return self

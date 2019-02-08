@@ -77,6 +77,14 @@ class Role
     }
 
     /**
+     * @return ArrayCollection
+     */
+    public function getRoleToAr()
+    {
+        return $this->roleToAr;
+    }
+
+    /**
      * @param AccessRight $accessRight
      *
      * @return self
