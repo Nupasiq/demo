@@ -28,7 +28,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
     public function onThrowable(GetResponseForExceptionEvent $event)
     {
         $errors = [];
-        if (!$event->getException() instanceof AppException) {
+        if ($event->getException() instanceof AppException) {
             $errors = $event->getException()->getErrors();
         }
 

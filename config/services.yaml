@@ -49,3 +49,7 @@ services:
             - "@doctrine.orm.default_entity_manager"
             - "@security.token_storage"
     # End Managers
+
+    App\Security\Voters\BaseVoter:
+        tags: [security.voter]
+        arguments: ["@doctrine.orm.default_entity_manager"]

@@ -8,6 +8,7 @@ use App\Entity\Blog;
 use App\Entity\Topic;
 use App\Entity\User;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
@@ -144,11 +145,13 @@ class BlogDataManager extends AbstractDataManager
                 }
             }
         }
-        /**
-         * @var User $user
-         */
-        $user = $this->tokenStorage->getToken()->getUser();
-        $blog->setOwner($user);
+        if ($this->getDto()->getRequestType() === Request::METHOD_POST) {
+            /**
+             * @var User $user
+             */
+            $user = $this->tokenStorage->getToken()->getUser();
+            $blog->setOwner($user);
+        }
     }
 
     /**

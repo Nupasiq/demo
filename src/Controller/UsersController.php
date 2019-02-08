@@ -65,6 +65,7 @@ class UsersController extends AbstractController
      */
     public function postAction(UserDataManager $manager, UserDTO $dto): Response
     {
+        $this->denyAccessUnlessGranted('', $dto);
         $response = $this->view($manager->execute($dto));
         $response
             ->getContext()
@@ -83,6 +84,7 @@ class UsersController extends AbstractController
      */
     public function putAction(UserDataManager $manager, UserDTO $dto): Response
     {
+        $this->denyAccessUnlessGranted('', $dto);
         $response = $this->view($manager->execute($dto));
         $response
             ->getContext()
@@ -101,6 +103,7 @@ class UsersController extends AbstractController
      */
     public function deleteAction(UserDataManager $manager, UserDTO $dto): Response
     {
+        $this->denyAccessUnlessGranted('', $dto);
         $response = $this->view($manager->execute($dto));
         $response
             ->getContext()
