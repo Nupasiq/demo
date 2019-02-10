@@ -29,7 +29,7 @@ class UsersController extends AbstractController
      */
     public function getAction(UserDataManager $manager, UserDTO $dto): Response
     {
-        $response = $this->view($manager->execute($dto));
+        $response = $this->view($this->prepareResponseData($manager->execute($dto)));
         $response
             ->getContext()
             ->setGroups(['user_single']);
@@ -47,7 +47,7 @@ class UsersController extends AbstractController
      */
     public function cgetAction(UserDataManager $manager, UserDTO $dto): Response
     {
-        $response = $this->view($manager->execute($dto));
+        $response = $this->view($this->prepareResponseData($manager->execute($dto)));
         $response
             ->getContext()
             ->setGroups(['user_list']);
@@ -66,7 +66,7 @@ class UsersController extends AbstractController
     public function postAction(UserDataManager $manager, UserDTO $dto): Response
     {
         $this->denyAccessUnlessGranted('', $dto);
-        $response = $this->view($manager->execute($dto));
+        $response = $this->view($this->prepareResponseData($manager->execute($dto)));
         $response
             ->getContext()
             ->setGroups(['user_single']);
@@ -85,7 +85,7 @@ class UsersController extends AbstractController
     public function putAction(UserDataManager $manager, UserDTO $dto): Response
     {
         $this->denyAccessUnlessGranted('', $dto);
-        $response = $this->view($manager->execute($dto));
+        $response = $this->view($this->prepareResponseData($manager->execute($dto)));
         $response
             ->getContext()
             ->setGroups(['user_single']);
@@ -104,7 +104,7 @@ class UsersController extends AbstractController
     public function deleteAction(UserDataManager $manager, UserDTO $dto): Response
     {
         $this->denyAccessUnlessGranted('', $dto);
-        $response = $this->view($manager->execute($dto));
+        $response = $this->view($this->prepareResponseData($manager->execute($dto)));
         $response
             ->getContext()
             ->setGroups(['user_single']);

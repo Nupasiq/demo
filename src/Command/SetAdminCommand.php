@@ -57,6 +57,7 @@ class SetAdminCommand extends Command
      *
      * @return int|void|null
      *
+     * @throws \Doctrine\ORM\NonUniqueResultException
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -69,7 +70,7 @@ class SetAdminCommand extends Command
             $user = new User();
             $user
                 ->setEmail(self::USER_EMAIL)
-                ->setSalt('123')
+                ->setSalt(bin2hex(random_bytes(10)))
                 ->setPassword($this->passwordEncoder->encodePassword($user, self::PASSWORD))
                 ->setRoles([$this->em->getReference(Role::class, Role::ROLE_ADMIN)])
                 ->setFirstName('Jon')
