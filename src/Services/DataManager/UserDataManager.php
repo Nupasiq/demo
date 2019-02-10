@@ -154,10 +154,12 @@ class UserDataManager extends AbstractDataManager
      * @param User $user
      *
      * @return string
+     *
+     * @throws \Exception
      */
     private function preparePassword(User $user): string
     {
-        $user->setSalt(is_null($user->getSalt()) ? '123' : $user->getSalt());
+        $user->setSalt(is_null($user->getSalt()) ? bin2hex(random_bytes(10)) : $user->getSalt());
 
         return $this->passwordEncoder->encodePassword($user, $this->getDto()->password);
     }
